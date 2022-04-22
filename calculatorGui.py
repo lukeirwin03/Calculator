@@ -64,6 +64,8 @@ class GUI:
         self.dec.grid(row=5, column=2)
         self.calculate_button = Button(numFrame, text="=", width=3, command=self.calculate)
         self.calculate_button.grid(row=6, column=3)
+        self.history_button = Button(numFrame, text='History', width = 3, command= self.createHistoryWin)
+        self.history_button.grid(row=6, column = 2)
 
     def clicked(self, val):
         self.entryBox.insert(END, f'{val}')
@@ -84,7 +86,21 @@ class GUI:
         self.entryBox.insert(0,str(self.answer))
 
     def store(self):
-        #pair = [self.expression, self.answer]
         with open('history.csv', 'a+', newline='') as outfile:
             appender = csv.writer(outfile, delimiter=',')
             appender.writerow([self.expression, self.answer])
+
+    def createHistoryWin(self):
+        historyWin = Toplevel()
+        historyWin.title('Calculation History')
+        outline = Frame(historyWin, highlightbackground='blue', highlightthickness=2)
+        outline.grid(padx=3,pady=3)
+        with open('history.csv', 'r+', newline='') as outfile:
+            rowcount = 0
+            for i in outfile:
+                tempLabel = Label(outline, text=f'{i}')
+                rowcount += 1
+                tempLabel.grid(row=rowcount, column=0)
+        
+        historyWin.geometry(f'220x{rowcount * 30}')
+        
