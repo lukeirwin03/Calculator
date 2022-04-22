@@ -1,7 +1,7 @@
 from curses import window
 from tkinter import *
 from tkinter import ttk
-from csv
+import csv
 
 class GUI:
 
@@ -74,12 +74,17 @@ class GUI:
         self.entryBox.delete(0, END)
 
     def backspace(self):
-        self.entryBox.delete(len(self.expression)-1,END)
+        #self.expression = self.expression[0:len(self.expression)-2]
+        pass
 
     def calculate(self):
-        answer = str(eval(self.expression))
+        self.answer = str(eval(self.expression))
+        self.store()
         self.entryBox.delete(0,END)
-        self.entryBox.insert(0,str(answer))
+        self.entryBox.insert(0,str(self.answer))
 
     def store(self):
-        pass
+        #pair = [self.expression, self.answer]
+        with open('history.csv', 'a+', newline='') as outfile:
+            appender = csv.writer(outfile, delimiter=',')
+            appender.writerow([self.expression, self.answer])
