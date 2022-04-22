@@ -1,7 +1,7 @@
 from curses import window
 from tkinter import *
 from tkinter import ttk
-
+from csv
 
 class GUI:
 
