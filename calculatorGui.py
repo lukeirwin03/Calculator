@@ -94,13 +94,14 @@ class GUI:
         historyWin = Toplevel()
         historyWin.title('Calculation History')
         outline = Frame(historyWin, highlightbackground='blue', highlightthickness=2)
-        outline.grid(padx=3,pady=3)
-        with open('history.csv', 'r+', newline='') as outfile:
+        outline.grid(padx=3,pady=3, ipadx=3,ipady=3)
+        with open('history.csv', 'r', newline='') as outfile:
             rowcount = 0
-            for i in outfile:
-                tempLabel = Label(outline, text=f'{i}')
+            box = Listbox(outline)
+            for line in outfile:
+                line = line.split(',')
+                box.insert(rowcount, f'{line[0]} = {line[1]}')
                 rowcount += 1
-                tempLabel.grid(row=rowcount, column=0)
-        
-        historyWin.geometry(f'220x{rowcount * 30}')
+            box.grid(row=1, column=0)
+        historyWin.geometry('220x220')
         
