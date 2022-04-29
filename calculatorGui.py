@@ -76,11 +76,16 @@ class GUI:
         self.entryBox.delete(0, END)
 
     def backspace(self):
-        #self.expression = self.expression[0:len(self.expression)-2]
-        pass
+        self.expression = self.expression[:len(self.expression)-1]
+        self.entryBox.delete(0,END)
+        self.entryBox.insert(END, self.expression)
+        
 
     def calculate(self):
-        self.answer = str(eval(self.expression))
+        self.answer = str(self.expression)
+        self.entryBox.delete(0,END)
+        self.entryBox.insert(END, 'ERROR')
+        self.answer = eval(self.answer)
         self.store()
         self.entryBox.delete(0,END)
         self.entryBox.insert(0,str(self.answer))
