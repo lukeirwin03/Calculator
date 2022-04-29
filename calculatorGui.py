@@ -11,8 +11,6 @@ class GUI:
     def __init__(self, window):
         self.window = window
         self.style = ttk.Style(window)
-        #self.style.theme_use()
-
 
         frameTop = Frame(window, width=200)
         frameTop.grid(columnspan=1)
@@ -80,7 +78,6 @@ class GUI:
         self.entryBox.delete(0,END)
         self.entryBox.insert(END, self.expression)
         
-
     def calculate(self):
         self.answer = str(self.expression)
         self.entryBox.delete(0,END)

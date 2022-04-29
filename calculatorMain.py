@@ -8,7 +8,6 @@ def main():
     window.geometry('255x210')
     window.resizable(False,False)
 
-
     widgets = GUI(window)
 
     window.mainloop()
